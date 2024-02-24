@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import NavBar from "../components/NavBar";
 import Posts from "../components/Posts";
-import Pagination from "../components/Pagination";
+import PageNumbersList from "../components/PageNumbersList";
 import { apiURL } from "../assets/apiURL";
 import axios from "axios";
 
@@ -9,7 +9,6 @@ const Home = () => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage] = useState(10);
 
   useEffect(() => {
     setLoading(true);
@@ -26,8 +25,8 @@ const Home = () => {
       });
   }, []);
 
-  const indexOfLastPost = currentPage * postsPerPage;
-  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const indexOfLastPost = currentPage * 10;
+  const indexOfFirstPost = indexOfLastPost - 10;
   const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
@@ -36,11 +35,7 @@ const Home = () => {
     <div>
       <NavBar />
       <Posts posts={currentPosts} loading={loading} />
-      <Pagination
-        postsPerPage={postsPerPage}
-        totalPosts={posts.length}
-        paginate={paginate}
-      />
+      <PageNumbersList totalPosts={posts.length} paginate={paginate} />
     </div>
   );
 };

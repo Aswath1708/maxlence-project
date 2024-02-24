@@ -6,14 +6,19 @@ import Login from "./Pages/Login";
 import SignUp from "./Pages/SignUp";
 
 function App() {
-
-  return <>
-  <Routes>
-    <Route path="/" element={<Home/>}/>
-    <Route path="/login" element={<Login/>}/>
-    <Route path="/signup" element={<SignUp/>}/>
-  </Routes>
-  </>;
+  return (
+    <>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route
+          path="*"
+          element={<h1 className="text-center">404 Page Not Found.</h1>}
+        />
+      </Routes>
+    </>
+  );
 }
 
 export default App;
